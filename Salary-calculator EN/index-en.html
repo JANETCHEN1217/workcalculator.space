@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <link rel="stylesheet" href="styles-en.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>Salary Calculator <span class="emoji">💼</span></h1>
+            <button class="language-switch" onclick="window.location.href='../Salary-calculator CN/index.html'">🇨🇳 中文</button>
+        </div>
+        
+        <!-- Basic Information -->
+        <div class="section">
+            <h2>Basic Information <span class="emoji">📝</span></h2>
+            <div class="input-group">
+                <label for="monthlySalary">Monthly Salary ($)</label>
+                <input type="number" id="monthlySalary" placeholder="Enter your monthly salary" min="0" step="100" value="10000">
+            </div>
+            <div class="input-group">
+                <label for="workDays">Working Days per Month</label>
+                <input type="number" id="workDays" placeholder="Working days" min="1" max="31" value="22">
+            </div>
+            <div class="input-group">
+                <label for="workHours">Working Hours per Day</label>
+                <input type="number" id="workHours" placeholder="Working hours" min="1" max="24" value="8">
+            </div>
+            <div class="input-group">
+                <label for="workStartTime">Start Time</label>
+                <input type="time" id="workStartTime" value="09:00">
+            </div>
+            <div class="input-group">
+                <label for="workEndTime">End Time</label>
+                <input type="time" id="workEndTime" value="18:00">
+            </div>
+        </div>
+        
+<!-- Real-time Status -->
+<div class="section">
+    <h2>Real-time Status <span class="emoji">⏱️</span></h2>
+    <div class="earnings-container">
+        <div class="earning-item">
+            <div class="earning-icon">💰</div>
+            <div class="earning-details">
+                <div class="earning-label">Today Earned</div>
+                <div class="earning-value" id="todayEarned">$0.00</div>
+            </div>
+        </div>
+        <div class="earning-item">
+            <div class="earning-icon">📅</div>
+            <div class="earning-details">
+                <div class="earning-label">Month Earned</div>
+                <div class="earning-value" id="monthlyEarned">$0.00</div>
+            </div>
+        </div>
+        <div class="earning-item">
+            <div class="earning-icon">📆</div>
+            <div class="earning-details">
+                <div class="earning-label">Year Earned</div>
+                <div class="earning-value" id="yearlyEarned">$0.00</div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="countdown">Time until finish: <span id="countdown">Calculating...</span></p>
+    <div class="countdown-progress-container">
+        <div class="countdown-progress" id="countdownProgress"></div>
+    </div>
+</div>
+
+<!-- Real-time Income -->
+<div class="section">
+    <h2>Real-time Income <span class="emoji">💸</span></h2>
+    <div class="income-box">
+        <div class="income-item">
+            <div class="income-icon">⏰</div>
+            <div class="income-rate" id="hourRate">$0.00</div>
+            <div class="income-label">Per Hour</div>
+        </div>
+        <div class="income-item">
+            <div class="income-icon">⏲️</div>
+            <div class="income-rate" id="minuteRate">$0.00</div>
+            <div class="income-label">Per Minute</div>
+        </div>
+        <div class="income-item">
+            <div class="income-icon">⌛</div>
+            <div class="income-rate" id="secondRate">$0.00</div>
+            <div class="income-label">Per Second</div>
+        </div>
+    </div>
+</div>
+        
+        <!-- Slacking Off/Overtime Calculator -->
+        <div class="section">
+            <h2>Break & Overtime Calculator <span class="emoji">🐟</span></h2>
+            <div class="calculator-container">
+                <div class="calculator-box fish-box">
+                    <h3>Break Time Calculator</h3>
+                    <button id="fishButton" class="fish-button">Start Break</button>
+                    <div class="timer" id="fishTimer">00:00:00</div>
+                    <div class="money-info">
+                        <div>Current break earning: <span id="currentFishMoney">$0.00</span></div>
+                        <div>Total break time: <span id="totalFishTime">0 hours 0 minutes 0 seconds</span></div>
+                        <div>Total break earning: <span id="totalFishMoney">$0.00</span></div>
+                    </div>
+                    <div class="achievement" id="fishAchievement">Not started: Start a break to earn achievements</div>
+                </div>
+                
+                <div class="calculator-box overwork-box">
+                    <h3>Overtime Calculator</h3>
+                    <button id="overworkButton" class="overwork-button">Start Overtime</button>
+                    <div class="timer" id="overworkTimer">00:00:00</div>
+                    <div class="money-info">
+                        <div>Current overtime income: <span id="currentOverworkMoney">$0.00</span></div>
+                        <div>Total overtime: <span id="totalOverworkTime">0 hours 0 minutes 0 seconds</span></div>
+                        <div>Total overtime income: <span id="totalOverworkMoney">$0.00</span></div>
+                    </div>
+                    <div class="achievement" id="overworkAchievement">Not started: Start overtime to earn achievements</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Item Conversion -->
+        <div class="section">
+            <h2>Wishlist <span class="emoji">🛍️</span></h2>
+            
+            <div class="category-selector">
+                <button class="category-btn active" data-category="daily">Daily Items</button>
+                <button class="category-btn" data-category="luxury">Luxury Items</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+            </div>
+            
+            <div class="item-grid">
+                <!-- Items will be dynamically added via JS -->
+            </div>
+            
+            <div class="custom-item">
+                <h3>Custom Item</h3>
+                <div class="input-group">
+                    <input type="text" id="customName" placeholder="Item name">
+                    <input type="number" id="customPrice" placeholder="Price">
+                    <button id="addCustomItem">Calculate</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-result">
+                <!-- Calculation results will be displayed here -->
+            </div>
+            
+            <div class="my-wishlist">
+                <h3>My Wishlist</h3>
+                <div class="my-wishlist-items">
+                    <!-- Wishlist items will be dynamically added via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cat-character">
+        <div class="cat-speech">Meow~ Keep working, I'm here with you!</div>
+    </div>
+    
+    <script src="script-en.js"></script>
+</body>
+</html>
