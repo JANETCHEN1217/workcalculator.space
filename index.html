@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打工人计算器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>打工人计算器 <span class="emoji">💼</span></h1>
+            <button class="language-switch" onclick="window.location.href='../Salary-calculator EN/index-en.html'">🇬🇧 English</button>
+        </div>
+        
+        <!-- 基本信息 -->
+        <div class="section">
+            <h2>基本信息 <span class="emoji">📝</span></h2>
+            <div class="input-group">
+                <label for="monthlySalary">月薪 (元)</label>
+                <input type="number" id="monthlySalary" placeholder="输入你的月薪" min="0" step="100" value="10000">
+            </div>
+            <div class="input-group">
+                <label for="workDays">每月工作天数</label>
+                <input type="number" id="workDays" placeholder="工作天数" min="1" max="31" value="22">
+            </div>
+            <div class="input-group">
+                <label for="workHours">每天工作时长 (小时)</label>
+                <input type="number" id="workHours" placeholder="工作时长" min="1" max="24" value="8">
+            </div>
+            <div class="input-group">
+                <label for="workStartTime">上班时间</label>
+                <input type="time" id="workStartTime" value="09:00">
+            </div>
+            <div class="input-group">
+                <label for="workEndTime">下班时间</label>
+                <input type="time" id="workEndTime" value="18:00">
+            </div>
+        </div>
+        
+<!-- 实时状态 -->
+<div class="section">
+    <h2>实时状态 <span class="emoji">⏱️</span></h2>
+    <div class="earnings-container">
+        <div class="earning-item">
+            <div class="earning-icon">💰</div>
+            <div class="earning-details">
+                <div class="earning-label">今日已赚</div>
+                <div class="earning-value" id="todayEarned">￥0.00</div>
+            </div>
+        </div>
+        <div class="earning-item">
+            <div class="earning-icon">📅</div>
+            <div class="earning-details">
+                <div class="earning-label">本月已赚</div>
+                <div class="earning-value" id="monthlyEarned">￥0.00</div>
+            </div>
+        </div>
+        <div class="earning-item">
+            <div class="earning-icon">📆</div>
+            <div class="earning-details">
+                <div class="earning-label">今年已赚</div>
+                <div class="earning-value" id="yearlyEarned">￥0.00</div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="countdown">距离下班还有: <span id="countdown">计算中...</span></p>
+    <div class="countdown-progress-container">
+        <div class="countdown-progress" id="countdownProgress"></div>
+    </div>
+</div>
+
+<!-- 实时收入 -->
+<div class="section">
+    <h2>实时收入 <span class="emoji">💸</span></h2>
+    <div class="income-box">
+        <div class="income-item">
+            <div class="income-icon">⏰</div>
+            <div class="income-rate" id="hourRate">￥0.00</div>
+            <div class="income-label">每小时</div>
+        </div>
+        <div class="income-item">
+            <div class="income-icon">⏲️</div>
+            <div class="income-rate" id="minuteRate">￥0.00</div>
+            <div class="income-label">每分钟</div>
+        </div>
+        <div class="income-item">
+            <div class="income-icon">⌛</div>
+            <div class="income-rate" id="secondRate">￥0.00</div>
+            <div class="income-label">每秒钟</div>
+        </div>
+    </div>
+</div>
+        
+        <!-- 摸鱼/内卷计算器 -->
+        <div class="section">
+            <h2>摸鱼&内卷计算器 <span class="emoji">🐟</span></h2>
+            <div class="calculator-container">
+                <div class="calculator-box fish-box">
+                    <h3>摸鱼计算器</h3>
+                    <button id="fishButton" class="fish-button">开始摸鱼</button>
+                    <div class="timer" id="fishTimer">00:00:00</div>
+                    <div class="money-info">
+                        <div>本次摸鱼赚到: <span id="currentFishMoney">￥0.00</span></div>
+                        <div>总计摸鱼时间: <span id="totalFishTime">0小时0分钟0秒</span></div>
+                        <div>总计摸鱼赚到: <span id="totalFishMoney">￥0.00</span></div>
+                    </div>
+                    <div class="achievement" id="fishAchievement">尚未开始：开始摸鱼以获得成就</div>
+                </div>
+                
+                <div class="calculator-box overwork-box">
+                    <h3>内卷计算器</h3>
+                    <button id="overworkButton" class="overwork-button">开始加班</button>
+                    <div class="timer" id="overworkTimer">00:00:00</div>
+                    <div class="money-info">
+                        <div>本次加班收入: <span id="currentOverworkMoney">￥0.00</span></div>
+                        <div>总计加班时间: <span id="totalOverworkTime">0小时0分钟0秒</span></div>
+                        <div>总计加班收入: <span id="totalOverworkMoney">￥0.00</span></div>
+                    </div>
+                    <div class="achievement" id="overworkAchievement">尚未开始：开始加班以获得成就</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 物品换算 -->
+        <div class="section">
+            <h2>打工人愿望清单 <span class="emoji">🛍️</span></h2>
+            
+            <div class="category-selector">
+                <button class="category-btn active" data-category="daily">日常消费</button>
+                <button class="category-btn" data-category="luxury">奢侈品</button>
+                <button class="category-btn" data-category="travel">旅游</button>
+            </div>
+            
+            <div class="item-grid">
+                <!-- 物品会通过JS动态添加 -->
+            </div>
+            
+            <div class="custom-item">
+                <h3>自定义物品</h3>
+                <div class="input-group">
+                    <input type="text" id="customName" placeholder="物品名称">
+                    <input type="number" id="customPrice" placeholder="价格">
+                    <button id="addCustomItem">计算</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-result">
+                <!-- 计算结果会显示在这里 -->
+            </div>
+            
+            <div class="my-wishlist">
+                <h3>我的心愿单</h3>
+                <div class="my-wishlist-items">
+                    <!-- 心愿单项目会通过JS动态添加 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cat-character">
+        <div class="cat-speech">喵~加油工作吧，我在这里陪着你！</div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
